@@ -2,33 +2,37 @@
   "name": "@warren-bank/adb-monkey",
   "version": "1.0.0",
   "description": "A Javascript interface to the Android monkey tool over an adb connection.",
-  "keywords": [
-    "adb",
-    "monkey",
-    "monkeyrunner"
-  ],
-  "bugs": {
-    "url": "https://github.com/warren-bank/fork-js-adb-monkey/issues"
-  },
   "license": "Apache-2.0",
-  "author": {
-    "name": "CyberAgent, Inc.",
-    "email": "npm@cyberagent.co.jp",
-    "url": "http://www.cyberagent.co.jp/"
-  },
   "main": "./src/monkey",
+  "files": [
+    "src",
+    "browser-build/dist"
+  ],
+  "scripts": {
+    "test": "_mocha --recursive --reporter spec",
+    "test:log": "npm run test -- --no-colors >./test/test.log 2>&1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/warren-bank/fork-js-adb-monkey.git"
   },
-  "scripts": {
-    "test": "_mocha --recursive --reporter spec",
-    "test:log": "npm run test -- --no-colors >./test/test.log 2>&1"
+  "bugs": {
+    "url": "https://github.com/warren-bank/fork-js-adb-monkey/issues"
+  },
+  "author": {
+    "name": "CyberAgent, Inc.",
+    "email": "npm@cyberagent.co.jp",
+    "url": "http://www.cyberagent.co.jp/"
   },
   "devDependencies": {
     "chai": "~1.8.1",
     "mocha": "~1.14.0",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0"
-  }
+  },
+  "keywords": [
+    "adb",
+    "monkey",
+    "monkeyrunner"
+  ]
 }

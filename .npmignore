@@ -1,6 +1,0 @@
-browser-build/
-examples/
-node_modules/
-test/
-
-!browser-build/dist/
