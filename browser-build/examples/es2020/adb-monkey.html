@@ -1,0 +1,115 @@
+<html>
+<head>
+  <script src="../../dist/es2020/adb-monkey.js"></script>
+  <script>
+    const monkey = window.Monkey
+    let client
+
+    window.onbeforeunload = function() {
+      if (is_websocket_open())
+        client.stream.socket.close()
+      if (client)
+        client.end()
+    }
+
+    const run_example_01 = async function() {
+      const client = await get_client()
+
+      client.press(3 /* KEYCODE_HOME */, function(err) {
+        show_result(err, 'Pressed home button')
+      })
+    }
+
+    const run_example_02 = async function() {
+      const client = await get_client()
+
+      client.multi()
+        .touchDown(100, 0)
+        .sleep(5)
+        .touchMove(100, 20)
+        .sleep(5)
+        .touchMove(100, 40)
+        .sleep(5)
+        .touchMove(100, 60)
+        .sleep(5)
+        .touchMove(100, 80)
+        .sleep(5)
+        .touchMove(100, 100)
+        .sleep(5)
+        .touchUp(100, 100)
+        .sleep(5)
+        .execute(function(err) {
+          show_result(err, 'Dragged out the notification bar')
+        })
+    }
+
+    const run_example_03 = async function() {
+      const client = await get_client()
+
+      client.getDisplayWidth(function(err, width) {
+        if (err)
+          return show_result(err)
+
+        client.getDisplayHeight(function(err, height) {
+          show_result(err, `Display size is ${width}x${height}`)
+        })
+      })
+    }
+
+    const run_example_04 = async function() {
+      const client = await get_client()
+
+      client.type('hello monkey!', function(err) {
+        show_result(err, 'Said hello to monkey')
+      })
+    }
+
+    const get_client = function() {
+      return new Promise((resolve, reject) => {
+        if (is_websocket_open()) {
+          resolve(client)
+        }
+        else {
+          client = monkey.connect([
+            8080,
+            'localhost',
+            function() {
+              resolve(client)
+            }
+          ])
+        }
+      })
+    }
+
+    const is_websocket_open = function() {
+      return client && (client.stream.socket.readyState === WebSocket.OPEN)
+    }
+
+    const show_result = function(err, msg) {
+      window.alert(err ? err.message : msg)
+    }
+  </script>
+</head>
+<body>
+  <h3>Examples</h3>
+
+  <ol>
+    <li>
+      <h4>press the home button</h4>
+      <div><button onclick="run_example_01()">Run</button></div>
+    </li>
+    <li>
+      <h4>drag down the notification shade</h4>
+      <div><button onclick="run_example_02()">Run</button></div>
+    </li>
+    <li>
+      <h4>get the display size</h4>
+      <div><button onclick="run_example_03()">Run</button></div>
+    </li>
+    <li>
+      <h4>type text</h4>
+      <div><button onclick="run_example_04()">Run</button></div>
+    </li>
+  </ol>
+</body>
+</html>
