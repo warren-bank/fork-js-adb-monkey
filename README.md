@@ -18,7 +18,7 @@ The following examples assume that monkey is already running (via `adb shell mon
 
 ```javascript
 var assert = require('assert');
-var monkey = require('adbkit-monkey');
+var monkey = require('@warren-bank/adb-monkey');
 
 var client = monkey.connect({ port: 1080 });
 
@@ -33,7 +33,7 @@ client.press(3 /* KEYCODE_HOME */, function(err) {
 
 ```javascript
 var assert = require('assert');
-var monkey = require('adbkit-monkey');
+var monkey = require('@warren-bank/adb-monkey');
 
 var client = monkey.connect({ port: 1080 });
 
@@ -63,7 +63,7 @@ client.multi()
 
 ```javascript
 var assert = require('assert');
-var monkey = require('adbkit-monkey');
+var monkey = require('@warren-bank/adb-monkey');
 
 var client = monkey.connect({ port: 1080 });
 
@@ -83,7 +83,7 @@ Note that you should manually focus a text field first.
 
 ```javascript
 var assert = require('assert');
-var monkey = require('adbkit-monkey');
+var monkey = require('@warren-bank/adb-monkey');
 
 var client = monkey.connect({ port: 1080 });
 
