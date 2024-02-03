@@ -1,12 +1,2 @@
-/.editorconfig
-/.npmignore
-/*.tgz
-/npm-debug.log
-/Gruntfile.coffee
-/index.coffee
-/CONTRIBUTING.md
-/src/
-/test/
-/temp/
-/git_hooks/
-*.!sync
+node_modules/
+test/
