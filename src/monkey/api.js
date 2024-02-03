@@ -1,6 +1,10 @@
 const {EventEmitter} = require('events');
 
 class Api extends EventEmitter {
+  constructor(options) {
+    super(options)
+  }
+
   send() {
     throw new Error("send is not implemented");
   }

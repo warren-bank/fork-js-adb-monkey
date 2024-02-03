@@ -10,7 +10,7 @@ class MockDuplex extends Stream.Duplex {
 
   causeRead(chunk) {
     if (!Buffer.isBuffer(chunk)) {
-      chunk = new Buffer(chunk);
+      chunk = Buffer.from(chunk);
     }
     this.push(chunk);
     this.push(null);

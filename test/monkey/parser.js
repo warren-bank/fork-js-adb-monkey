@@ -8,13 +8,13 @@ describe('Parser', function() {
   it("should emit 'wait' when waiting for more data", function(done) {
     const parser = new Parser;
     parser.on('wait', done);
-    return parser.parse(new Buffer('OK'));
+    return parser.parse(Buffer.from('OK'));
   });
 
   it("should emit 'drain' when all data has been consumed", function(done) {
     const parser = new Parser;
     parser.on('drain', done);
-    return parser.parse(new Buffer('OK\n'));
+    return parser.parse(Buffer.from('OK\n'));
   });
 
   it("should parse a successful reply", function(done) {
@@ -25,7 +25,7 @@ describe('Parser', function() {
       expect(reply.isError()).to.equal(false);
       return done();
     });
-    return parser.parse(new Buffer('OK\n'));
+    return parser.parse(Buffer.from('OK\n'));
   });
 
   it("should parse a successful reply with value", function(done) {
@@ -35,7 +35,7 @@ describe('Parser', function() {
       expect(reply.value).to.equal('2');
       return done();
     });
-    return parser.parse(new Buffer('OK:2\n'));
+    return parser.parse(Buffer.from('OK:2\n'));
   });
 
   it("should parse a successful reply with spaces in value", function(done) {
@@ -45,7 +45,7 @@ describe('Parser', function() {
       expect(reply.value).to.equal('a b c');
       return done();
     });
-    return parser.parse(new Buffer('OK:a b c\n'));
+    return parser.parse(Buffer.from('OK:a b c\n'));
   });
 
   it("should parse an empty successful reply", function(done) {
@@ -55,7 +55,7 @@ describe('Parser', function() {
       expect(reply.value).to.equal('');
       return done();
     });
-    return parser.parse(new Buffer('OK:\n'));
+    return parser.parse(Buffer.from('OK:\n'));
   });
 
   it("should not trim values in successful replies", function(done) {
@@ -65,7 +65,7 @@ describe('Parser', function() {
       expect(reply.value).to.equal(' test ');
       return done();
     });
-    return parser.parse(new Buffer('OK: test \n'));
+    return parser.parse(Buffer.from('OK: test \n'));
   });
 
   it("should not trim values in error replies", function(done) {
@@ -75,7 +75,7 @@ describe('Parser', function() {
       expect(reply.value).to.equal(' test ');
       return done();
     });
-    return parser.parse(new Buffer('ERROR: test \n'));
+    return parser.parse(Buffer.from('ERROR: test \n'));
   });
 
   it("should parse an error reply with value", function(done) {
@@ -88,7 +88,7 @@ describe('Parser', function() {
       expect(reply.toError().message).to.equal('unknown var');
       return done();
     });
-    return parser.parse(new Buffer('ERROR:unknown var\n'));
+    return parser.parse(Buffer.from('ERROR:unknown var\n'));
   });
 
   it("should throw a SyntaxError for an unknown reply", function(done) {
@@ -97,7 +97,7 @@ describe('Parser', function() {
       expect(err).to.be.an.instanceOf(SyntaxError);
       return done();
     });
-    return parser.parse(new Buffer('FOO:bar\n'));
+    return parser.parse(Buffer.from('FOO:bar\n'));
   });
 
   return it("should parse multiple replies from one chunk", function(done) {
@@ -111,6 +111,6 @@ describe('Parser', function() {
         return done();
       });
     });
-    return parser.parse(new Buffer('OK:2\nOK:okay\n'));
+    return parser.parse(Buffer.from('OK:2\nOK:okay\n'));
   });
 });

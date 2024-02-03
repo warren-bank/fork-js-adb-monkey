@@ -7,6 +7,7 @@ const Parser = require('./parser');
 
 class Client extends Api {
   constructor() {
+    super()
     this.commandQueue = new Queue;
     this.parser = new Parser;
     this.stream = null;

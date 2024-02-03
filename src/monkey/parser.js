@@ -4,8 +4,9 @@ const Reply = require('./reply');
 
 class Parser extends EventEmitter {
   constructor(options) {
+    super(options)
     this.column = 0;
-    this.buffer = new Buffer('');
+    this.buffer = Buffer.from('');
   }
 
   parse(chunk) {

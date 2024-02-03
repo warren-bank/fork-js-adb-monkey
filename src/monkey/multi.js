@@ -3,6 +3,7 @@ const Command = require('./command');
 
 class Multi extends Api {
   constructor(monkey) {
+    super()
     this.monkey = monkey;
     this.commands = [];
     this.replies = [];

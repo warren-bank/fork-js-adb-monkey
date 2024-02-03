@@ -3,6 +3,10 @@ const Net = require('net');
 const Client = require('./client');
 
 class Connection extends Client {
+  constructor() {
+    super()
+  }
+
   connect(options) {
     const stream = Net.connect(options);
     stream.setNoDelay(true);
